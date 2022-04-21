@@ -3,6 +3,11 @@ clusters = A, B
 A.bootstrap.servers = ${SOURCE}
 B.bootstrap.servers = ${DESTINATION}
 
+group.id=${GROUP_ID}
+config.storage.topic=${GROUP_ID}-mirrormaker-cluster-configs
+status.storage.topic=${GROUP_ID}-mirrormaker-cluster-status
+offset.storage.topic=${GROUP_ID}-mirrormaker-cluster-offsets
+
 A->B.enabled = true
 
 A->B.topics = ${TOPICS}
@@ -15,20 +20,23 @@ replication.policy.separator =
 source.cluster.alias = 
 target.cluster.alias =
 
+
 ############################# Internal Topic Settings  #############################
 # The replication factor for mm2 internal topics "heartbeats", "B.checkpoints.internal" and
 # "mm2-offset-syncs.B.internal"
 # For anything other than development testing, a value greater than 1 is recommended to ensure availability such as 3.
-checkpoints.topic.replication.factor=3
-heartbeats.topic.replication.factor=3
+config.storage.topic=mirrormaker2-cluster-configs
+
+checkpoints.topic.replication.factor=2
+heartbeats.topic.replication.factor=2
 offset-syncs.topic.replication.factor=3
 
 # The replication factor for connect internal topics "mm2-configs.B.internal", "mm2-offsets.B.internal" and
 # "mm2-status.B.internal"
 # For anything other than development testing, a value greater than 1 is recommended to ensure availability such as 3.
-offset.storage.replication.factor=3
-status.storage.replication.factor=3
-config.storage.replication.factor=3
+offset.storage.replication.factor=2
+status.storage.replication.factor=2
+config.storage.replication.factor=2
 
 # customize as needed
 # replication.policy.separator = _
