@@ -1,4 +1,4 @@
-FROM foxdalas/kafka:3.1.0
+FROM foxdalas/kafka:3.1.1
 USER root
 
 RUN apt-get update
